@@ -13,13 +13,15 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Column(
         children: [
+          const Spacer(),
           Center(
             child: Image.asset(
               'assets/images/login_logo.png',
-              height: 300,
-              width: 300,
+              height: 200,
+              width: 200,
             ),
           ),
+          const Spacer(),
           AuthButton(
             buttonColor: Colors.blue,
             icon: CircleAvatar(
@@ -34,6 +36,18 @@ class _LoginScreenState extends State<LoginScreen> {
             label: 'Google',
             onPress: () {},
           ),
+          const SizedBox(height: 10),
+          AuthButton(
+            buttonColor: Colors.green,
+            icon: const Icon(
+              Icons.phone,
+              size: 30,
+              color: Colors.white,
+            ),
+            label: 'Phone',
+            onPress: () {},
+          ),
+          const Spacer(),
         ],
       ),
     );
