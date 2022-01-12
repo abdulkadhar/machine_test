@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:machine_test/screens/user_home_screen.dart';
 import 'package:machine_test/widgets/login-screen/auth_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,7 +46,12 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Colors.white,
             ),
             label: 'Phone',
-            onPress: () {},
+            onPress: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const UserHomeScreen(),
+              ),
+            ),
           ),
           const Spacer(),
         ],
