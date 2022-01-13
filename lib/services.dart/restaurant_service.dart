@@ -8,4 +8,8 @@ class RestaurantService {
         .map((e) => RestaurantResponse.fromJson(e))
         .toList();
   }
+
+  static double convertSarToInr(double dishPrice) {
+    return dishPrice * 19.69;
+  }
 }
