@@ -9,7 +9,7 @@ part of 'dish_response.dart';
 DishResponse _$DishResponseFromJson(Map<String, dynamic> json) {
   return DishResponse(
     dishAvailability: json['dish_Availability'] as bool,
-    dishCalories: json['dish_calories'] as int,
+    dishCalories: (json['dish_calories'] as num).toDouble(),
     dishCurrency: json['dish_currency'] as String,
     dishDescription: json['dish_description'] as String,
     dishId: json['dish_id'] as String,
@@ -18,6 +18,9 @@ DishResponse _$DishResponseFromJson(Map<String, dynamic> json) {
     dishPrice: (json['dish_price'] as num).toDouble(),
     dishType: json['dish_Type'] as int,
     nexturl: json['nexturl'] as String,
+    addonCat: (json['addonCat'] as List<dynamic>)
+        .map((e) => AddonCategoryResponse.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -33,4 +36,5 @@ Map<String, dynamic> _$DishResponseToJson(DishResponse instance) =>
       'dish_Availability': instance.dishAvailability,
       'dish_Type': instance.dishType,
       'nexturl': instance.nexturl,
+      'addonCat': instance.addonCat,
     };

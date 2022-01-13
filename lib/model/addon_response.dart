@@ -11,7 +11,7 @@ class AddonResponse {
   final String dishName;
 
   @JsonKey(name: 'dish_price')
-  final int dishPrice;
+  final double dishPrice;
 
   @JsonKey(name: 'dish_image')
   final String dishImage;
@@ -20,13 +20,13 @@ class AddonResponse {
   final String dishCurrency;
 
   @JsonKey(name: 'dish_calories')
-  final int dishCalories;
+  final double dishCalories;
 
   @JsonKey(name: 'dish_description')
-  final int dishDescription;
+  final String dishDescription;
 
   @JsonKey(name: 'dish_Type')
-  final bool dishType;
+  final int dishType;
 
   AddonResponse({
     required this.dishId,

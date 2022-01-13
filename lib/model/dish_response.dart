@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:machine_test/model/addon_category_response.dart';
 
 part 'dish_response.g.dart';
 
@@ -20,7 +21,7 @@ class DishResponse {
   final String dishCurrency;
 
   @JsonKey(name: 'dish_calories')
-  final int dishCalories;
+  final double dishCalories;
 
   @JsonKey(name: 'dish_description')
   final String dishDescription;
@@ -34,6 +35,9 @@ class DishResponse {
   @JsonKey(name: 'nexturl')
   final String nexturl;
 
+  @JsonKey(name: 'addonCat')
+  final List<AddonCategoryResponse> addonCat;
+
   DishResponse({
     required this.dishAvailability,
     required this.dishCalories,
@@ -45,6 +49,7 @@ class DishResponse {
     required this.dishPrice,
     required this.dishType,
     required this.nexturl,
+    required this.addonCat,
   });
 
   factory DishResponse.fromJson(Map<String, dynamic> json) =>

@@ -10,12 +10,12 @@ AddonResponse _$AddonResponseFromJson(Map<String, dynamic> json) {
   return AddonResponse(
     dishId: json['dish_id'] as String,
     dishName: json['dish_name'] as String,
-    dishPrice: json['dish_price'] as int,
+    dishPrice: (json['dish_price'] as num).toDouble(),
     dishImage: json['dish_image'] as String,
     dishCurrency: json['dish_currency'] as String,
-    dishCalories: json['dish_calories'] as int,
-    dishDescription: json['dish_description'] as int,
-    dishType: json['dish_Type'] as bool,
+    dishCalories: (json['dish_calories'] as num).toDouble(),
+    dishDescription: json['dish_description'] as String,
+    dishType: json['dish_Type'] as int,
   );
 }
 

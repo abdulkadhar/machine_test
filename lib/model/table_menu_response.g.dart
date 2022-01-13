@@ -12,8 +12,8 @@ TableMenuResponse _$TableMenuResponseFromJson(Map<String, dynamic> json) {
     menuCategoryId: json['menu_category_id'] as String,
     menuCategoryImage: json['menu_category_image'] as String,
     nexturl: json['nexturl'] as String,
-    addonCat: (json['addonCat'] as List<dynamic>?)
-        ?.map((e) => AddonCategoryResponse.fromJson(e as Map<String, dynamic>))
+    categoryDishes: (json['category_dishes'] as List<dynamic>)
+        .map((e) => DishResponse.fromJson(e as Map<String, dynamic>))
         .toList(),
   );
 }
@@ -24,5 +24,5 @@ Map<String, dynamic> _$TableMenuResponseToJson(TableMenuResponse instance) =>
       'menu_category_id': instance.menuCategoryId,
       'menu_category_image': instance.menuCategoryImage,
       'nexturl': instance.nexturl,
-      'addonCat': instance.addonCat,
+      'category_dishes': instance.categoryDishes,
     };
