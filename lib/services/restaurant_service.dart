@@ -1,5 +1,5 @@
 import 'package:machine_test/model/restaurant_response.dart';
-import 'package:machine_test/services.dart/api.dart';
+import 'package:machine_test/services/api.dart';
 
 class RestaurantService {
   static Future<List<RestaurantResponse>> getRestaurantData() async {
