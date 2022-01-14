@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class CartButton extends StatelessWidget {
   final int cartCount;
+  final VoidCallback onPress;
   const CartButton({
     Key? key,
     required this.cartCount,
+    required this.onPress,
   }) : super(key: key);
 
   @override
@@ -14,16 +16,17 @@ class CartButton extends StatelessWidget {
       child: Stack(
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: onPress,
             icon: const Icon(
               Icons.shopping_cart,
+              size: 30,
             ),
           ),
           Positioned(
             right: 8,
             top: 6,
             child: Container(
-              padding: const EdgeInsets.all(2),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
               child: Text(
                 cartCount.toString(),
                 style: const TextStyle(
@@ -31,7 +34,7 @@ class CartButton extends StatelessWidget {
                 ),
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(50),
                 color: Colors.red,
               ),
             ),
