@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test/model/cart_model.dart';
+import 'package:machine_test/model/user_model.dart';
+import 'package:machine_test/screens/user_home_screen.dart';
 import 'package:machine_test/services/restaurant_service.dart';
 import 'package:machine_test/widgets/checkout_screen/checkout_dish_card.dart';
 
 class CheckoutPage extends StatefulWidget {
   final List<CartModel> productData;
   final int itemCount;
+  final UserModel model;
   const CheckoutPage({
     Key? key,
     required this.productData,
     required this.itemCount,
+    required this.model,
   }) : super(key: key);
 
   @override
@@ -23,6 +27,28 @@ class _CheckoutStatePage extends State<CheckoutPage> {
   void initState() {
     super.initState();
     products = widget.productData;
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Text(
+                  "Order placed successfully",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   double getTotalPrice(List<CartModel> productsData) {
@@ -148,7 +174,7 @@ class _CheckoutStatePage extends State<CheckoutPage> {
         ),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Color(0xFF1A3E15),
+            primary: const Color(0xFF1A3E15),
             padding: const EdgeInsets.symmetric(vertical: 10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
@@ -158,7 +184,18 @@ class _CheckoutStatePage extends State<CheckoutPage> {
             "Place Order",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UserHomeScreen(
+                  model: widget.model,
+                ),
+              ),
+              (route) => false,
+            );
+            _showMyDialog();
+          },
         ),
       ),
     );
