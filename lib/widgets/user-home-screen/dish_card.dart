@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test/model/cart_model.dart';
 import 'package:machine_test/model/dish_response.dart';
-import 'package:machine_test/services.dart/restaurant_service.dart';
+import 'package:machine_test/services/restaurant_service.dart';
 import 'package:machine_test/widgets/user-home-screen/dish_counter.dart';
 import 'package:machine_test/widgets/user-home-screen/food_grade_symbol.dart';
 
@@ -89,7 +89,10 @@ class DishCard extends StatelessWidget {
             height: 80,
             width: 80,
             color: Colors.grey.withOpacity(0.5),
-            // child: Image.network(dishData.dishImage),
+            child: Image.network(
+              "https://thumbs.dreamstime.com/b/healthy-food-background-fruits-vegetables-cereal-nuts-superfood-dietary-balanced-vegetarian-eating-products-kitchen-143677456.jpg",
+              fit: BoxFit.cover,
+            ),
           ),
         ],
       ),
