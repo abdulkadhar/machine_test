@@ -22,8 +22,13 @@ class ApiService {
   static Future getData(String url,
       {Map<String, String> queryParams = const {}}) async {
     try {
-      http.Response response =
-          await http.get(Uri.https(baseUrl, url, queryParams));
+      http.Response response = await http.get(
+        Uri.https(
+          baseUrl,
+          url,
+          queryParams,
+        ),
+      );
       if (response.statusCode == 200) {
         final resBody = jsonDecode(response.body);
         return resBody;

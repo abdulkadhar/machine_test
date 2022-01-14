@@ -12,7 +12,6 @@ import 'package:machine_test/widgets/user-home-screen/dish_card.dart';
 import 'package:machine_test/widgets/user-home-screen/profile_container.dart';
 import 'package:machine_test/widgets/user-home-screen/shimmer_widget.dart';
 
-
 class UserHomeScreen extends StatefulWidget {
   final UserModel model;
   const UserHomeScreen({
@@ -35,8 +34,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   }
 
   int getPresentElement(CartModel data) {
-    return cartList.indexOf(cartList.firstWhere(
-        (cartData) => cartData.dishData.dishId == data.dishData.dishId));
+    return cartList.indexOf(
+      cartList.firstWhere(
+        (cartData) => cartData.dishData.dishId == data.dishData.dishId,
+      ),
+    );
   }
 
   int getCartCount() {

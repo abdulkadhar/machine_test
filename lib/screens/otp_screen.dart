@@ -216,20 +216,25 @@ class _OtpScreenState extends State<OtpScreen> {
                 },
               ),
             ElevatedButton(
-                onPressed:
-                    phoneVerificationId.isEmpty ? _handleSubmit : _handleOtp,
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 50,
-                    vertical: 15,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+              onPressed:
+                  phoneVerificationId.isEmpty ? _handleSubmit : _handleOtp,
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 50,
+                  vertical: 15,
                 ),
-                child: const Text("Submit",
-                    style: TextStyle(color: Colors.white))),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: const Text(
+                "Submit",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
             const Spacer(),
           ],
         ),

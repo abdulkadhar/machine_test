@@ -72,15 +72,24 @@ class DishCard extends StatelessWidget {
                 const SizedBox(height: 10),
                 CartAddButton(
                   onValueChange: (value) {
-                    onDishAddition(CartModel(dishData: dishData, count: value));
+                    onDishAddition(
+                      CartModel(
+                        dishData: dishData,
+                        count: value,
+                      ),
+                    );
                   },
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 if (dishData.addonCat.isNotEmpty)
-                  const Text("Customization Available",
-                      style: TextStyle(color: Colors.red)),
+                  const Text(
+                    "Customization Available",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
               ],
             ),
           ),

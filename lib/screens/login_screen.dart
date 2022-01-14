@@ -44,16 +44,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 final uid = userCredential.user?.uid;
                 if (uid != null) {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UserHomeScreen(
-                                model: UserModel(
-                                  uid: uid,
-                                  userName: userCredential.user?.displayName,
-                                  phoneNumber: userCredential.user?.phoneNumber,
-                                  type: AuthType.google,
-                                ),
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserHomeScreen(
+                        model: UserModel(
+                          uid: uid,
+                          userName: userCredential.user?.displayName,
+                          phoneNumber: userCredential.user?.phoneNumber,
+                          type: AuthType.google,
+                        ),
+                      ),
+                    ),
+                  );
                 }
               } catch (e) {
                 return;
