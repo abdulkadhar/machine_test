@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ProfileContainer extends StatelessWidget {
   final String userName;
-  final int id;
+  final String id;
   const ProfileContainer({
     Key? key,
     required this.id,
@@ -32,6 +32,11 @@ class ProfileContainer extends StatelessWidget {
             const CircleAvatar(
               radius: 35,
               backgroundColor: Color(0xFFF3A84F),
+              child: Icon(
+                Icons.account_circle,
+                color: Colors.grey,
+                size: 30,
+              ),
             ),
             const SizedBox(
               height: 10,
@@ -51,9 +56,9 @@ class ProfileContainer extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "ID: " + id.toString(),
+              "ID: " + id,
               style: const TextStyle(
-                fontSize: 20,
+                fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),
             )
