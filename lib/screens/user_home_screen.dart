@@ -10,6 +10,8 @@ import 'package:machine_test/services/restaurant_service.dart';
 import 'package:machine_test/widgets/user-home-screen/cart_button.dart';
 import 'package:machine_test/widgets/user-home-screen/dish_card.dart';
 import 'package:machine_test/widgets/user-home-screen/profile_container.dart';
+import 'package:machine_test/widgets/user-home-screen/shimmer_widget.dart';
+
 
 class UserHomeScreen extends StatefulWidget {
   final UserModel model;
@@ -65,7 +67,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
         future: RestaurantService.getRestaurantData(),
         builder: (context, responseData) {
           if (responseData.hasError || !responseData.hasData) {
-            return const SizedBox.shrink();
+            return const ShimmerListLoader();
           }
 
           return DefaultTabController(
@@ -142,16 +144,27 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 actions: [
                   CartButton(
                     cartCount: getCartCount(),
-                    onPress: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CheckoutPage(
-                          productData: cartList,
-                          itemCount: getCartCount(),
+                    onPress: () {
+                      if (getCartCount() != 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CheckoutPage(
+                              model: widget.model,
+                              productData: cartList,
+                              itemCount: getCartCount(),
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Please add product to cart"),
                         ),
-                      ),
-                    ),
-                  )
+                      );
+                    },
+                  ),
                 ],
               ),
               body: TabBarView(
