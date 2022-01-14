@@ -21,7 +21,8 @@ class _CartAddButtonState extends State<CartAddButton>
       borderRadius: BorderRadius.circular(40),
       elevation: 3,
       child: Container(
-        height: 30,
+        padding: const EdgeInsets.symmetric(vertical: 7),
+        height: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           color: Colors.green,
@@ -37,15 +38,7 @@ class _CartAddButtonState extends State<CartAddButton>
                 });
                 widget.onValueChange(count);
               },
-              child: const Text(
-                "-",
-                style: TextStyle(
-                  fontSize: 46,
-                  height: 0.8,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
+              child: const Icon(Icons.remove, color: Colors.white),
             ),
             const SizedBox(width: 15),
             Text(
@@ -64,14 +57,7 @@ class _CartAddButtonState extends State<CartAddButton>
                 });
                 widget.onValueChange(count);
               },
-              child: const Text(
-                "+",
-                style: TextStyle(
-                  fontSize: 26,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
+              child: const Icon(Icons.add, color: Colors.white),
             ),
             const SizedBox(width: 15),
           ],
