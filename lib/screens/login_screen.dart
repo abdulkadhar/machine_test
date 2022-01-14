@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:machine_test/model/user_model.dart';
+import 'package:machine_test/screens/otp_screen.dart';
 import 'package:machine_test/screens/user_home_screen.dart';
+import 'package:machine_test/services/login_service.dart';
 import 'package:machine_test/widgets/login-screen/auth_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,7 +38,27 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             label: 'Google',
-            onPress: () {},
+            onPress: () async {
+              try {
+                final userCredential = await LoginService.signInWithGoogle();
+                final uid = userCredential.user?.uid;
+                if (uid != null) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserHomeScreen(
+                                model: UserModel(
+                                  uid: uid,
+                                  userName: userCredential.user?.displayName,
+                                  phoneNumber: userCredential.user?.phoneNumber,
+                                  type: AuthType.google,
+                                ),
+                              )));
+                }
+              } catch (e) {
+                return;
+              }
+            },
           ),
           const SizedBox(height: 10),
           AuthButton(
@@ -49,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
             onPress: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const UserHomeScreen(),
+                builder: (context) => const OtpScreen(),
               ),
             ),
           ),
