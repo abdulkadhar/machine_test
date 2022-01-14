@@ -1,19 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:machine_test/model/cart_model.dart';
 import 'package:machine_test/model/restaurant_response.dart';
-import 'package:machine_test/services.dart/restaurant_service.dart';
+import 'package:machine_test/model/user_model.dart';
+import 'package:machine_test/screens/checkout_screen.dart';
+import 'package:machine_test/screens/login_screen.dart';
+import 'package:machine_test/services/login_service.dart';
+import 'package:machine_test/services/restaurant_service.dart';
 import 'package:machine_test/widgets/user-home-screen/cart_button.dart';
 import 'package:machine_test/widgets/user-home-screen/dish_card.dart';
 import 'package:machine_test/widgets/user-home-screen/profile_container.dart';
 
 class UserHomeScreen extends StatefulWidget {
-  const UserHomeScreen({Key? key}) : super(key: key);
+  final UserModel model;
+  const UserHomeScreen({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
 
   @override
   _UserHomeScreenState createState() => _UserHomeScreenState();
 }
 
 class _UserHomeScreenState extends State<UserHomeScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   List<CartModel> cartList = [];
 
   bool isElementPresent(CartModel data) {
@@ -35,6 +46,19 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     return count;
   }
 
+  String handleUserName() {
+    final currentUserName = widget.model.userName;
+    final currentPhoneNumber = widget.model.phoneNumber;
+    if (widget.model.type == AuthType.google && currentUserName != null) {
+      return currentUserName;
+    }
+    if (widget.model.type == AuthType.phoneNumber &&
+        currentPhoneNumber != null) {
+      return currentPhoneNumber;
+    }
+    return "Guest user";
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<RestaurantResponse>>(
@@ -50,9 +74,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               drawer: Drawer(
                 child: Column(
                   children: [
-                    const ProfileContainer(
-                      id: 23,
-                      userName: "MohammedMohammedMohammed",
+                    ProfileContainer(
+                      id: widget.model.uid,
+                      userName: handleUserName(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -67,7 +91,30 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                           fontSize: 20,
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () async {
+                        try {
+                          if (widget.model.type == AuthType.google) {
+                            await LoginService.signOut();
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                              (route) => false,
+                            );
+                          }
+                          auth.signOut();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                            (route) => false,
+                          );
+                        } catch (e) {
+                          return;
+                        }
+                      },
                     )
                   ],
                 ),
@@ -95,6 +142,15 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 actions: [
                   CartButton(
                     cartCount: getCartCount(),
+                    onPress: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckoutPage(
+                          productData: cartList,
+                          itemCount: getCartCount(),
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),
