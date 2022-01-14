@@ -76,14 +76,9 @@ class CheckoutDishCard extends StatelessWidget {
                   const SizedBox(width: 15),
                   InkWell(
                     onTap: () {},
-                    child: const Text(
-                      "-",
-                      style: TextStyle(
-                        fontSize: 46,
-                        height: 0.8,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                      ),
+                    child: const Icon(
+                      Icons.remove,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(width: 15),
@@ -98,13 +93,9 @@ class CheckoutDishCard extends StatelessWidget {
                   const SizedBox(width: 15),
                   InkWell(
                     onTap: () {},
-                    child: const Text(
-                      "+",
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                      ),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(width: 15),
