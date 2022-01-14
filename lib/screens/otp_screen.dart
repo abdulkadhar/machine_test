@@ -36,18 +36,20 @@ class _OtpScreenState extends State<OtpScreen> {
         final uid = response.user?.uid;
         if (uid != null) {
           Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => UserHomeScreen(
-                  model: UserModel(
-                    uid: uid,
-                    userName: response.user?.displayName,
-                    phoneNumber: response.user?.phoneNumber,
-                    type: AuthType.phoneNumber,
-                  ),
+            context,
+            MaterialPageRoute(
+              builder: (context) => UserHomeScreen(
+                model: UserModel(
+                  uid: uid,
+                  userName: response.user?.displayName,
+                  phoneNumber: response.user?.phoneNumber,
+                  type: AuthType.phoneNumber,
                 ),
               ),
-              (route) => false);
+            ),
+            (route) => false,
+          );
+          return;
         }
       } catch (e) {
         return;
@@ -83,6 +85,7 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               (route) => false,
             );
+            return;
           }
         },
         verificationFailed: (FirebaseAuthException e) {
@@ -102,7 +105,6 @@ class _OtpScreenState extends State<OtpScreen> {
           );
         },
         codeSent: (String verificationId, int? resendToken) async {
-          print('verification ID: $verificationId');
           setState(() {
             phoneVerificationId = verificationId;
           });
@@ -141,6 +143,15 @@ class _OtpScreenState extends State<OtpScreen> {
             const Spacer(),
             const SizedBox(height: 10),
             if (phoneVerificationId.isEmpty)
+              const Text(
+                "Enter mobile number",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500),
+              ),
+            if (phoneVerificationId.isEmpty) const SizedBox(height: 10),
+            if (phoneVerificationId.isEmpty)
               Form(
                 key: mobileForm,
                 child: Column(
@@ -173,6 +184,15 @@ class _OtpScreenState extends State<OtpScreen> {
                   ],
                 ),
               ),
+            if (phoneVerificationId.isNotEmpty)
+              const Text(
+                "Enter 6-digit OTP code",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500),
+              ),
+            if (phoneVerificationId.isNotEmpty) const SizedBox(height: 10),
             if (phoneVerificationId.isNotEmpty)
               TextFormField(
                 controller: otpController,
